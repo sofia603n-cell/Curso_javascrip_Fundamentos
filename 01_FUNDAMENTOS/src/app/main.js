@@ -1,15 +1,20 @@
 "use strict";
 
-const temperatura = ["c", "f", "k"];
-const longitud = ["m", "km", "cm"];
+const temperatura = ["c", "f", "k", "kelvin", "celsius", "fahrenheit"];
+const longitud = ["m", "km", "cm", "metros", "kilometros", "centimetros"];
+
 
 //  Función convertir
 function convertir(value, from, to) {
 
+    from = from.toLowerCase();
+    to = to.toLowerCase();
+
     let valor = Number(value);
+    let resultado;
 
     if (!Number.isFinite(valor)) {
-        return "Error: valor inválido";
+        return "Error: valor inválido, escribir en numeros";
     }
 
     if (![...temperatura, ...longitud].includes(from) ||
@@ -24,10 +29,17 @@ function convertir(value, from, to) {
         return "Error: categorías diferentes";
     }
 
-    let resultado;
-
-    //  TEMPERATURA
+    // 🔥 TEMPERATURA
     if (esTemp) {
+
+        if (from === "kelvin") from = "k";
+        if (from === "celsius") from = "c";
+        if (from === "fahrenheit") from = "f";
+
+        if (to === "kelvin") to = "k";
+        if (to === "celsius") to = "c";
+        if (to === "fahrenheit") to = "f";
+
         if (from === "c" && to === "f") {
             resultado = (valor * 9/5) + 32;
         } else if (from === "f" && to === "c") {
@@ -41,8 +53,17 @@ function convertir(value, from, to) {
         }
     }
 
-    // LONGITUD
+    // 🔥 LONGITUD
     if (esLong) {
+
+        if (from === "metros") from = "m";
+        if (from === "kilometros") from = "km";
+        if (from === "centimetros") from = "cm";
+
+        if (to === "metros") to = "m";
+        if (to === "kilometros") to = "km";
+        if (to === "centimetros") to = "cm";
+
         let metros;
 
         if (from === "m") metros = valor;
@@ -59,7 +80,7 @@ function convertir(value, from, to) {
 
 // 📋 Lista de pruebas
 const pruebas = [
-    { value: 100, from: "c", to: "f" },
+    { value: "treinta", from: "celsius", to: "f" },
     { value: 32, from: "f", to: "c" },
     { value: 0, from: "c", to: "f" },
     { value: -40, from: "c", to: "f" },
