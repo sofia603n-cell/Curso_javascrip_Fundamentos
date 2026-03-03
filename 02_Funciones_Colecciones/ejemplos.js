@@ -177,7 +177,7 @@ const carrito = [
   { producto: "Mouse", precio: 50 }
 ];
 
-const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+const total = carrito.reduce((ag, item) => ag + item.precio, 0);
 // 1050
 
 console.log(total)
